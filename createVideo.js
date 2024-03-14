@@ -1,7 +1,7 @@
 // import { films as cpoyFilms, Film } from "./main";
 
 
-const form = document.getElementById('create_form'); // Змінено на 'create_form'
+const form = document.getElementById('create_form'); // Змінено на 'create_form'436b45645h5h75
 if (form) {
     const nameIn = form.elements.name;
     const yearIn = form.elements.year;
