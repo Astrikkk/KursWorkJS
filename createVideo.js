@@ -1,4 +1,4 @@
-// import { films as cpoyFilms, Film } from "./main";
+import { films as cpoyFilms, Film } from "./main";
 
 
 const form = document.getElementById('create_form'); // Змінено на 'create_form'436b45645h5h75
@@ -14,12 +14,12 @@ if (form) {
 
     form.onsubmit = (event) => { // Змінено з addVideo на form.onsubmit
         event.preventDefault();
-        // let item = new Film(nameIn.value, +yearIn.value, tagsIn.value.split(' '), authorIn.value, countryIn.value, timeIn.value, ratingIn.value, urlIn.value);
+        let item = 10;
 
-        //window.location.href = 'HomePage.html';
-        // cpoyFilms.push(item);
-        // console.log(films);
-        //addFilmToList(item);
+        window.location.href = 'HomePage.html';
+        cpoyFilms.push(item);
+        console.log(films);
+        // addFilmToList(item);
     }
 } else {
     console.error('Форма create_form не знайдена');

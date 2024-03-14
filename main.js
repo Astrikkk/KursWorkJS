@@ -46,7 +46,7 @@ class Film {
     }
 }
 
-// export { films, Film };
+export { films, Film };
 
 
 
