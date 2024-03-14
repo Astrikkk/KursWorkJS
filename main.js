@@ -20,6 +20,9 @@ function addFilmToList(item) {
         </div>`;
 }
 
+
+
+
 function loadProductsToTable(items) {
     filmList.innerHTML = "";
     for (const film of items) {
