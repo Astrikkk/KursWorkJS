@@ -1,12 +1,32 @@
 const filmList = document.querySelector('.row');
 
-const createTab = document.querySelector('#create-video-tab');
-
+// const createTab = document.querySelector('#create-video-tab');
+const updateBtn = document.querySelector('#update');
 //const addVideo = document.querySelector('#add-video');
-var films = [];
 
 
 
+import { films as copyFilms } from "./createVideo.js";
+
+
+function load() {
+    items = JSON.parse(localStorage.getItem(itemsKey));
+
+    list.innerHTML = "";
+    items.forEach(x => addItem(x));
+}
+
+updateBtn.onclick = (event) => {
+    console.log(copyFilms);
+    event.preventDefault();
+
+    filmList.innerHTML = ''
+
+    copyFilms.forEach(element => {
+        addFilmToList(element);
+    });
+    // додаємо в таблицю
+}
 
 function addFilmToList(item) {
     filmList.innerHTML += `
@@ -29,24 +49,9 @@ function loadProductsToTable(items) {
     }
 }
 
-class Film {
-    constructor(name, year, tags, author, country, time, rating, url) {
-        this.name = name;
-        this.year = year;
-        this.tags = tags;
-        this.author = author;
-        this.country = country;
-        this.time = time;
-        this.rating = rating;
-        this.url = url;
-    }
 
-    addTags(tag) {
-        this.tags.push(tag);
-    }
-}
 
-export { films, Film };
+
 
 
 
