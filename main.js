@@ -1,11 +1,14 @@
-const filmList = document.querySelector('.row');
+const filmList = document.getElementById('film-list');
 
 const createTab = document.querySelector('#create-video-tab');
 
 //const addVideo = document.querySelector('#add-video');
-var films = [];
 
 
+const itemsKey = "list-films";
+let films = [];
+load();
+loadProductsToTable(films);
 
 
 function addFilmToList(item) {
@@ -46,9 +49,9 @@ class Film {
     }
 }
 
-export { films, Film };
-
-
+function load() {
+    films = JSON.parse(localStorage.getItem(itemsKey));
+}
 
 
 
