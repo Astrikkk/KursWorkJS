@@ -1,7 +1,7 @@
 const filmList = document.querySelector('.row');
 
-// const createTab = document.querySelector('#create-video-tab');
-const updateBtn = document.querySelector('#update');
+const createTab = document.querySelector('#create-video-tab');
+
 //const addVideo = document.querySelector('#add-video');
 var films = [];
 
