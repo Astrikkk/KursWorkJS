@@ -1,4 +1,4 @@
-const filmList = document.getElementById('film-list');
+const filmList = document.querySelector('.row');
 
 // const createTab = document.querySelector('#create-video-tab');
 const updateBtn = document.querySelector('#update');
