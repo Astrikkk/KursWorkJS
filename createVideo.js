@@ -1,29 +1,54 @@
-import { films as cpoyFilms, Film } from "./main";
+const itemsKey = "list-films";
+let films = [];
 
+const form = document.getElementById('create_form');
 
-const form = document.getElementById('create_form'); // Змінено на 'create_form'436b45645h5h75
 if (form) {
-    const nameIn = form.elements.name;
-    const yearIn = form.elements.year;
-    const tagsIn = form.elements.tags;
-    const authorIn = form.elements.author;
-    const countryIn = form.elements.country;
-    const timeIn = form.elements.time;
-    const ratingIn = form.elements.rating;
-    const urlIn = form.elements.url;
-
-    form.onsubmit = (event) => { // Змінено з addVideo на form.onsubmit
+    form.onsubmit = (event) => {
         event.preventDefault();
-        let item = 10;
 
-        window.location.href = 'HomePage.html';
-        cpoyFilms.push(item);
-        console.log(films);
-        // addFilmToList(item);
-    }
+        const nameIn = form.elements.name.value;
+        const yearIn = form.elements.year.value;
+        const tagsIn = form.elements.tags.value.split(',');
+        const authorIn = form.elements.author.value;
+        const countryIn = form.elements.country.value;
+        const timeIn = form.elements.time.value;
+        const ratingIn = form.elements.rating.value;
+        const urlIn = form.elements.url.value;
+
+        load();
+        let film = new Film(nameIn, yearIn, tagsIn, authorIn, countryIn,
+            timeIn, ratingIn, urlIn);
+        films.push(film);
+        save();
+        window.location.href = 'HomePage.html'; // Make sure the path is correct
+    };
 } else {
     console.error('Форма create_form не знайдена');
 }
 
+function save() {
+    localStorage.setItem(itemsKey, JSON.stringify(films));
+}
 
+function load() {
+    const storedFilms = localStorage.getItem(itemsKey);
+    films = storedFilms ? JSON.parse(storedFilms) : [];
+}
 
+class Film {
+    constructor(name, year, tags, author, country, time, rating, url) {
+        this.name = name;
+        this.year = year;
+        this.tags = tags;
+        this.author = author;
+        this.country = country;
+        this.time = time;
+        this.rating = rating;
+        this.url = url;
+    }
+
+    addTags(tag) {
+        this.tags.push(tag);
+    }
+}
