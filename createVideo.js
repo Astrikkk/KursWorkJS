@@ -1,28 +1,27 @@
 const itemsKey = "list-films";
 let films = [];
-
 const form = document.getElementById('create_form');
 
 if (form) {
     form.onsubmit = (event) => {
         event.preventDefault();
-
         const nameIn = form.elements.name.value;
         const yearIn = form.elements.year.value;
         const authorIn = form.elements.author.value;
         const ratingIn = form.elements.rating.value;
-        const imgUrlIn = form.elements.imgUrlIn.value;
-        const VideoUrlIn = form.elements.urlVideo.value;
-        const Scr1UrlIn = form.elements.Scr1Url.value;
-        const Scr2UrlIn = form.elements.Scr2Url.value;
-        const Scr3UrlIn = form.elements.Scr3Url.value;
-        const DescriptionIn = form.elements.description.value;
+        const ganreIn = form.elements.ganre.value;
+        const imgUrlIn = form.elements.imgUrl.value;
+        const videoUrlIn = form.elements.videoUrl.value;
+        const scr1Url = form.elements.scr1Url.value;
+        const scr2Url = form.elements.scr2Url.value;
+        const scr3Url = form.elements.scr3Url.value;
 
         load();
-        let film = new Film(nameIn, yearIn, authorIn, ratingIn, imgUrlIn ,VideoUrlIn , Scr1UrlIn, Scr2UrlIn, Scr3UrlIn, DescriptionIn);
+        let film = new Film(nameIn, yearIn, authorIn,
+            ratingIn, ganreIn, imgUrlIn, videoUrlIn, scr1Url, scr2Url, scr3Url);
         films.push(film);
         save();
-        window.location.href = 'HomePage.html';
+        window.location.href = 'HomePage.html'; // Make sure the path is correct
     };
 } else {
     console.error('Форма create_form не знайдена');
@@ -38,16 +37,16 @@ function load() {
 }
 
 class Film {
-    constructor(name, year, author, rating, url, urlVideo, urlScr1, urlScr2, urlScr3, desc) {
+    constructor(name, year, author, rating, ganre, url, urlVideo, urlScr1, urlScr2, urlScr3) {
         this.name = name;
         this.year = year;
         this.author = author;
         this.rating = rating;
-        this.imgUrlIn = url;
+        this.ganre = ganre
+        this.imgUrl = url;
         this.VideoUrl = urlVideo;
         this.Scr1Url = urlScr1;
         this.Scr2Url = urlScr2;
         this.Scr3Url = urlScr3;
-        this.description = desc;
     }
 }

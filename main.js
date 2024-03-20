@@ -2,22 +2,135 @@ const filmList = document.getElementById('film-list');
 
 const createTab = document.querySelector('#create-video-tab');
 
-//const addVideo = document.querySelector('#add-video');
 
+
+
+
+
+//const addVideo = document.querySelector('#add-video');
+const clearFilms = document.getElementById('clear-films');
+
+
+const sortByName = document.getElementById('sort-name');
+const sortByDate = document.getElementById('sort-date');
+const sortByRating = document.getElementById('sort-rating');
+
+const genreAction = document.getElementById('Action');
+const genreComedy = document.getElementById('Comedy');
+const genreDrama = document.getElementById('Drama');
+const genreHorror = document.getElementById('Horror');
+const genreAdventure = document.getElementById('Adventure');
+const genreScienceFiction = document.getElementById('Science Fiction');
+const genreThriller = document.getElementById('Thriller');
+const genreRomance = document.getElementById('Romance');
+const genreCrime = document.getElementById('Crime');
+const genreMystery = document.getElementById('Mystery');
+const genreFantasy = document.getElementById('Fantasy');
+const genreHistorical = document.getElementById('Historical');
+const genreWar = document.getElementById('War');
+const genreDocumentary = document.getElementById('Documentary');
+const genreAnimation = document.getElementById('Animation');
 
 const itemsKey = "list-films";
 let films = [];
 load();
 loadProductsToTable(films);
 
+// Створюємо об'єкт, що містить ідентифікатори кожного жанру і відповідні функції сортування
+
+const genres = {
+    'Action': () => SortByGenre('Action'),
+    'Comedy': () => SortByGenre('Comedy'),
+    'Drama': () => SortByGenre('Drama'),
+    'Horror': () => SortByGenre('Horror'),
+    'Adventure': () => SortByGenre('Adventure'),
+    'Science Fiction': () => SortByGenre('Science Fiction'),
+    'Thriller': () => SortByGenre('Thriller'),
+    'Romance': () => SortByGenre('Romance'),
+    'Crime': () => SortByGenre('Crime'),
+    'Mystery': () => SortByGenre('Mystery'),
+    'Fantasy': () => SortByGenre('Fantasy'),
+    'Historical': () => SortByGenre('Historical'),
+    'War': () => SortByGenre('War'),
+    'Documentary': () => SortByGenre('Documentary'),
+    'Animation': () => SortByGenre('Animation')
+};
+
+// Проходимо по кожному жанру і додаємо обробник подій
+Object.keys(genres).forEach(genre => {
+    const genreElement = document.getElementById(genre);
+    if (genreElement) {
+        genreElement.addEventListener('click', genres[genre]);
+    }
+});
+
+let filmId = 0;
+
+// genreCrime.onclick = () => {
+//     SortByGanre('Crime')
+// }
+clearFilms.onclick = () => {
+    // Очищення масиву фільмів
+    films = [];
+    // Оновлення відображення таблиці фільмів
+    loadProductsToTable(films);
+    // Очищення локального сховища, якщо необхідно
+    localStorage.removeItem(itemsKey);
+}
+
+sortByName.onclick = () => {
+    films.sort((a, b) => {
+        const nameA = a.name.toUpperCase();
+        const nameB = b.name.toUpperCase();
+        if (nameA < nameB) {
+            return -1;
+        }
+        if (nameA > nameB) {
+            return 1;
+        }
+        return 0;
+    });
+    loadProductsToTable(films);
+};
+
+
+sortByDate.onclick = () => {
+    films.sort((a, b) => a.year - b.year);
+
+    loadProductsToTable(films);
+};
+
+
+
+sortByRaiting.onclick = () => {
+    films.sort((a, b) => a.rating - b.rating);
+
+    loadProductsToTable(films);
+};
+
+
+
+
+
+
+function SortByGenre(genre) {
+    const newFilms = [];
+    films.forEach(element => {
+        if (element.ganre === genre)
+            newFilms.push(element);
+    });
+
+    loadProductsToTable(newFilms);
+}
+
+
 
 function addFilmToList(item) {
     filmList.innerHTML += `
     <div class="col mb-4">
         <div class="card bg-dark text-light">
-            <img src="${item.url}" class="card-img-top"
-                alt="${item.name}">
-            <div class="card-body">
+        <img src="${item.imgUrl}" class="card-img-top" alt="${item.name}">
+            <div class="card-body"> 
                 <h5 class="card-title">${item.name}</h5>
                 <p class="card-text">${item.year}</p>
             </div>
@@ -32,23 +145,6 @@ function loadProductsToTable(items) {
     }
 }
 
-class Film {
-    constructor(name, year, tags, author, country, time, rating, url) {
-        this.name = name;
-        this.year = year;
-        this.tags = tags;
-        this.author = author;
-        this.country = country;
-        this.time = time;
-        this.rating = rating;
-        this.url = url;
-    }
-
-    addTags(tag) {
-        this.tags.push(tag);
-    }
-}
-
 function load() {
     films = JSON.parse(localStorage.getItem(itemsKey));
 }
@@ -56,90 +152,3 @@ function load() {
 
 
 
-
-// const filmList = document.querySelector('.row');
-// const addVideo = document.querySelector('#add-video');
-// const films = [];
-
-
-// const form = document.forms.create_video;
-// const nameIn = form.elements.name;
-// const yearIn = form.elements.year;
-// const tagsIn = form.elements.tags;
-// const authorIn = form.elements.author;
-// const countryIn = form.elements.country;
-// const timeIn = form.elements.time;
-// const ratingIn = form.elements.rating;
-// const urlIn = form.elements.url;
-
-
-// document.getElementById('searchByNameBtn').onclick = () => {
-//     const searchTerm = searchInp.value.toLowerCase();
-//     loadProductsToTable(films.filter(x => x.name.toLowerCase().includes(searchTerm)));
-// };
-
-
-// addVideo.onclick = (event) => {
-
-//     event.preventDefault();
-//     // if (nameIn.value && urlIn.value) {
-//     let item = new Film(nameIn.value, +yearIn.value, tagsIn.value.split(' '), authorIn.value, countryIn.value, timeIn.value, ratingIn.value, urlIn.value);
-//     films.push(item);
-//     addFilmToList(item);
-//     // console.log(films);
-//     // } else
-//     //     alert("Enter all info");
-// }
-
-// function addFilmToList(item) {
-//     filmList.innerHTML += `
-//         <div class="col mb-4">
-//             <div class="card bg-dark text-light">
-//                 <img src="${item.imageUrl}" class="card-img-top" alt="...">
-//                 <div class="card-body">
-//                     <h5 class="card-title">${item.name}</h5>
-//                     <p class="card-text">${item.year}</p>
-//                 </div>
-//             </div>
-//         </div>`;
-// }
-
-// function loadProductsToTable(items) {
-//     filmList.innerHTML = "";
-//     for (const film of items) {
-//         addFilmToList(film);
-//     }
-// }
-
-
-
-// class Film {
-//     static count = 0;
-//     constructor(name, year, tags, author, country, time, rating, url) {
-//         this.name = name;
-//         this.year = year;
-//         this.tags = tags;
-//         this.author = author;
-//         this.country = country;
-//         this.time = time;
-//         this.rating = rating;
-//         this.url = url;
-//     }
-
-
-//     addTags(tag) {
-//         this.tags.push(tag);
-//     }
-// }
-
-
-
-
-// // class Film {
-// //     static count = 0;
-// //     constructor(name, year, imageUrl) {
-// //         this.name = name;
-// //         this.year = year;
-// //         this.imageUrl = imageUrl;
-// //     }
-// // }
