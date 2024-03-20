@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .ad-banner {
+            width: 350px;
+            height: 100px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            overflow: hidden;
+            display: flex;
+            position: fixed;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .ad-banner img {
+            width: 100px;
+            height: auto;
+        }
+
+        .ad-text {
+            padding: 10px;
+            /* background-color: rgba(255, 255, 255, 0.8); */
+        }
+
+        .buy-pivo {
+            padding-top: 10px;
+            font-size: 15px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .trista-metrov {
+            font-size: 14px;
+            text-align: center;
+            color: rgb(144, 169, 142);
+        }
+
+        .ad-text p {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .ad-text button {
+            margin-top: 5px;
+            padding: 7px 10px;
+            background-color: rgb(165, 48, 139);
+            color: #fff;
+            border: none;
+            border-radius: 2px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .count-message {
+            display: inline-block;
+            padding: 0 4px;
+            font-size: 14px;
+            position: relative;
+            border-radius: 50%;
+            color: white;
+            top: -15px;
+            right: 13px;
+            background-color: red;
+        }
+
+        .fake-cancel {
+            display: inline-block;
+            padding: 0 4px;
+            font-size: 17px;
+            position: relative;
+            background-color: white;
+            border: 1px solid rgb(95, 95, 95);
+            border-radius: 50%;
+            top: 577px;
+            left: 900px;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="ad-banner">
+        <img src="https://th.bing.com/th/id/OIP.d1tcjalN4slRNB56pP2VWAHaHa?rs=1&pid=ImgDetMain"
+            alt="Наталия 300 метрів від вас">
+        <div class="ad-text">
+            <div class="buy-pivo">Куплю пива, возьму врот!</div>
+            <div class="trista-metrov">40 лет{300м от вас}</div>
+            <button>Ответить</button>
+            <div class="count-message">1</div>
+        </div>
+    </div>
+    <button class="fake-cancel">✕</button>
+
+</body>
+
+</html>
