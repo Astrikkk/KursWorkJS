@@ -1,3 +1,35 @@
-import { films, filmId } from "./main.js";
+const urlParams = new URLSearchParams(window.location.search);
+const filmId = urlParams.get('filmId');
 
-films.findIndex(filmId);
+const films = JSON.parse(localStorage.getItem('list-films'));
+const selectedFilm = films.find(film => film.id === filmId);
+
+document.getElementById('Video').src = selectedFilm.VideoUrl;
+document.getElementById('ScreenShot1').innerHTML = `<img src="${film.Scr1Url}" alt="ScreenShot 1">`;
+document.getElementById('ScreenShot2').innerHTML = `<img src="${film.Scr2Url}" alt="ScreenShot 1">`;
+document.getElementById('ScreenShot3').innerHTML = `<img src="${film.Scr3Url}" alt="ScreenShot 1">`;
+document.getElementById('Description').textContent = film.description;
+
+
+
+
+
+
+
+
+
+class Film {
+    constructor(name, year, author, rating, ganre, url, urlVideo, urlScr1, urlScr2, urlScr3, description) {
+        this.name = name;
+        this.year = year;
+        this.author = author;
+        this.rating = rating;
+        this.ganre = ganre
+        this.imgUrl = url;
+        this.VideoUrl = urlVideo;
+        this.Scr1Url = urlScr1;
+        this.Scr2Url = urlScr2;
+        this.Scr3Url = urlScr3;
+        this.description = description;
+    }
+}

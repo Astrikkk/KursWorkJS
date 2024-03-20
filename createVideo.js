@@ -15,16 +15,17 @@ if (form) {
         const scr1Url = form.elements.scr1Url.value;
         const scr2Url = form.elements.scr2Url.value;
         const scr3Url = form.elements.scr3Url.value;
+        const Description = form.elements.scr3Url.description;
 
         load();
         let film = new Film(nameIn, yearIn, authorIn,
-            ratingIn, ganreIn, imgUrlIn, videoUrlIn, scr1Url, scr2Url, scr3Url);
+            ratingIn, ganreIn, imgUrlIn, videoUrlIn, scr1Url, scr2Url, scr3Url, Description);
         films.push(film);
         save();
         window.location.href = 'HomePage.html'; // Make sure the path is correct
     };
 } else {
-    console.error('Форма create_form не знайдена');
+    //console.error('Форма create_form не знайдена');
 }
 
 function save() {
@@ -37,7 +38,7 @@ function load() {
 }
 
 class Film {
-    constructor(name, year, author, rating, ganre, url, urlVideo, urlScr1, urlScr2, urlScr3) {
+    constructor(name, year, author, rating, ganre, url, urlVideo, urlScr1, urlScr2, urlScr3, description) {
         this.name = name;
         this.year = year;
         this.author = author;
@@ -48,5 +49,6 @@ class Film {
         this.Scr1Url = urlScr1;
         this.Scr2Url = urlScr2;
         this.Scr3Url = urlScr3;
+        this.description = description;
     }
 }

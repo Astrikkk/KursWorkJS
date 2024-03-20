@@ -32,6 +32,7 @@ const genreDocumentary = document.getElementById('Documentary');
 const genreAnimation = document.getElementById('Animation');
 
 const itemsKey = "list-films";
+const currentFilm = "current-film";
 let films = [];
 load();
 loadProductsToTable(films);
@@ -56,7 +57,6 @@ const genres = {
     'Animation': () => SortByGenre('Animation')
 };
 
-// Проходимо по кожному жанру і додаємо обробник подій
 Object.keys(genres).forEach(genre => {
     const genreElement = document.getElementById(genre);
     if (genreElement) {
@@ -70,11 +70,8 @@ let filmId = 0;
 //     SortByGanre('Crime')
 // }
 clearFilms.onclick = () => {
-    // Очищення масиву фільмів
     films = [];
-    // Оновлення відображення таблиці фільмів
     loadProductsToTable(films);
-    // Очищення локального сховища, якщо необхідно
     localStorage.removeItem(itemsKey);
 }
 
@@ -128,15 +125,18 @@ function SortByGenre(genre) {
 function addFilmToList(item) {
     filmList.innerHTML += `
     <div class="col mb-4">
-        <div class="card bg-dark text-light">
-        <img src="${item.imgUrl}" class="card-img-top" alt="${item.name}">
-            <div class="card-body"> 
-                <h5 class="card-title">${item.name}</h5>
-                <p class="card-text">${item.year}</p>
+        <a href="FilmOverview.html?filmId=${item.id}" class="text-decoration-none text-light">
+            <div class="card bg-dark text-light">
+                <img src="${item.imgUrl}" class="card-img-top" alt="${item.name}">
+                <div class="card-body"> 
+                    <h5 class="card-title">${item.name}</h5>
+                    <p class="card-text">${item.year}</p>
+                </div>
             </div>
-        </div>
+        </a>
     </div>`;
 }
+
 
 function loadProductsToTable(items) {
     filmList.innerHTML = "";
