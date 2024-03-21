@@ -20,6 +20,7 @@ if (form) {
         load();
         let film = new Film(nameIn, yearIn, authorIn,
             ratingIn, ganreIn, imgUrlIn, videoUrlIn, scr1Url, scr2Url, scr3Url, Description);
+        film.id = films.length;
         films.push(film);
         save();
         window.location.href = 'HomePage.html'; // Make sure the path is correct
@@ -38,6 +39,8 @@ function load() {
 }
 
 class Film {
+
+    static count = 0;
     constructor(name, year, author, rating, ganre, url, urlVideo, urlScr1, urlScr2, urlScr3, description) {
         this.name = name;
         this.year = year;
@@ -50,5 +53,6 @@ class Film {
         this.Scr2Url = urlScr2;
         this.Scr3Url = urlScr3;
         this.description = description;
+        this.id = ++Film.count;
     }
 }

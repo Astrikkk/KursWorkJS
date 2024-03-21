@@ -1,15 +1,9 @@
 const filmList = document.getElementById('film-list');
-
 const createTab = document.querySelector('#create-video-tab');
 
+const filmCards = document.querySelectorAll('.film-card');
 
-
-
-
-
-//const addVideo = document.querySelector('#add-video');
 const clearFilms = document.getElementById('clear-films');
-
 
 const sortByName = document.getElementById('sort-name');
 const sortByDate = document.getElementById('sort-date');
@@ -32,12 +26,9 @@ const genreDocumentary = document.getElementById('Documentary');
 const genreAnimation = document.getElementById('Animation');
 
 const itemsKey = "list-films";
-const currentFilm = "current-film";
 let films = [];
 load();
 loadProductsToTable(films);
-
-// Створюємо об'єкт, що містить ідентифікатори кожного жанру і відповідні функції сортування
 
 const genres = {
     'Action': () => SortByGenre('Action'),
@@ -64,11 +55,19 @@ Object.keys(genres).forEach(genre => {
     }
 });
 
-let filmId = 0;
+document.addEventListener('DOMContentLoaded', function () {
+    const filmCards = document.querySelectorAll('.film-card');
 
-// genreCrime.onclick = () => {
-//     SortByGanre('Crime')
-// }
+    // Додаємо обробник події для кожного елемента
+    filmCards.forEach(card => {
+        card.addEventListener('click', function (event) {
+            const filmId = this.querySelector('.film-id').textContent;
+            let currentFilm = films[filmId];
+        });
+    });
+});
+
+
 clearFilms.onclick = () => {
     films = [];
     loadProductsToTable(films);
@@ -90,53 +89,39 @@ sortByName.onclick = () => {
     loadProductsToTable(films);
 };
 
-
 sortByDate.onclick = () => {
     films.sort((a, b) => a.year - b.year);
-
     loadProductsToTable(films);
 };
 
-
-
-sortByRaiting.onclick = () => {
+sortByRating.onclick = () => {
     films.sort((a, b) => a.rating - b.rating);
-
     loadProductsToTable(films);
 };
-
-
-
-
-
 
 function SortByGenre(genre) {
     const newFilms = [];
     films.forEach(element => {
-        if (element.ganre === genre)
+        if (element.genre === genre) // Виправлено орфографічну помилку "ganre" на "genre"
             newFilms.push(element);
     });
-
     loadProductsToTable(newFilms);
 }
-
-
 
 function addFilmToList(item) {
     filmList.innerHTML += `
     <div class="col mb-4">
-        <a href="FilmOverview.html?filmId=${item.id}" class="text-decoration-none text-light">
+        <a href="#" class="text-decoration-none text-light film-card">
             <div class="card bg-dark text-light">
                 <img src="${item.imgUrl}" class="card-img-top" alt="${item.name}">
-                <div class="card-body"> 
-                    <h5 class="card-title">${item.name}</h5>
+                <div class="card-body">
+                    <h5 class="card-title"><span class="film-id">${item.id}</span>${item.name}</h5>
                     <p class="card-text">${item.year}</p>
                 </div>
             </div>
         </a>
     </div>`;
 }
-
 
 function loadProductsToTable(items) {
     filmList.innerHTML = "";
@@ -148,7 +133,4 @@ function loadProductsToTable(items) {
 function load() {
     films = JSON.parse(localStorage.getItem(itemsKey));
 }
-
-
-
 
