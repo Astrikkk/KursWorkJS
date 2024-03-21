@@ -54,6 +54,7 @@ Object.keys(genres).forEach(genre => {
         genreElement.addEventListener('click', genres[genre]);
     }
 });
+let currentFilm;
 
 document.addEventListener('DOMContentLoaded', function () {
     const filmCards = document.querySelectorAll('.film-card');
@@ -62,11 +63,13 @@ document.addEventListener('DOMContentLoaded', function () {
     filmCards.forEach(card => {
         card.addEventListener('click', function (event) {
             const filmId = this.querySelector('.film-id').textContent;
-            let currentFilm = films[filmId];
+            currentFilm = films[+filmId];
+            window.location.href = 'FilmOverview.html';
         });
     });
 });
 
+//export { currentFilm };
 
 clearFilms.onclick = () => {
     films = [];
