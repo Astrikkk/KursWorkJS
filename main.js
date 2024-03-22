@@ -25,7 +25,12 @@ const genreWar = document.getElementById('War');
 const genreDocumentary = document.getElementById('Documentary');
 const genreAnimation = document.getElementById('Animation');
 
+const searchButton = document.getElementById('searchByNameBtn');
+searchButton.addEventListener('click', searchByName);
+
+
 const itemsKey = "list-films";
+const FilmKey = "current-Film";
 let films = [];
 load();
 loadProductsToTable(films);
@@ -54,16 +59,18 @@ Object.keys(genres).forEach(genre => {
         genreElement.addEventListener('click', genres[genre]);
     }
 });
+
+
 let currentFilm;
 
 document.addEventListener('DOMContentLoaded', function () {
     const filmCards = document.querySelectorAll('.film-card');
 
-    // Додаємо обробник події для кожного елемента
     filmCards.forEach(card => {
         card.addEventListener('click', function (event) {
             const filmId = this.querySelector('.film-id').textContent;
-            currentFilm = films[+filmId];
+            currentFilm = filmId;
+            saveFilm(currentFilm);
             window.location.href = 'FilmOverview.html';
         });
     });
@@ -105,7 +112,7 @@ sortByRating.onclick = () => {
 function SortByGenre(genre) {
     const newFilms = [];
     films.forEach(element => {
-        if (element.genre === genre) // Виправлено орфографічну помилку "ganre" на "genre"
+        if (element.genre === genre)
             newFilms.push(element);
     });
     loadProductsToTable(newFilms);
@@ -126,6 +133,14 @@ function addFilmToList(item) {
     </div>`;
 }
 
+function searchByName() {
+    const searchTerm = document.querySelector('input[name="search_input"]').value.trim().toLowerCase();
+
+    const matchingFilms = films.filter(film => film.name.toLowerCase().includes(searchTerm));
+
+    loadProductsToTable(matchingFilms);
+}
+
 function loadProductsToTable(items) {
     filmList.innerHTML = "";
     for (const film of items) {
@@ -136,4 +151,6 @@ function loadProductsToTable(items) {
 function load() {
     films = JSON.parse(localStorage.getItem(itemsKey));
 }
-
+function saveFilm(item) {
+    localStorage.setItem(FilmKey, JSON.stringify(item));
+}

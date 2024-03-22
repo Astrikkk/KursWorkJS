@@ -1,18 +1,26 @@
-const urlParams = new URLSearchParams(window.location.search);
-const filmId = urlParams.get('filmId');
-
-const films = JSON.parse(localStorage.getItem('list-films'));
-const selectedFilm = films.find(film => film.id === parseInt(filmId));
-//import { currentFilm as film } from "./main.js";
-
-
-document.getElementById('Video').src = selectedFilm.VideoUrl;
-document.getElementById('ScreenShot1').innerHTML = `<img src="${selectedFilm.Scr1Url}" alt="ScreenShot 1">`;
-document.getElementById('ScreenShot2').innerHTML = `<img src="${selectedFilm.Scr2Url}" alt="ScreenShot 2">`;
-document.getElementById('ScreenShot3').innerHTML = `<img src="${selectedFilm.Scr3Url}" alt="ScreenShot 3">`;
-document.getElementById('Description').textContent = selectedFilm.description;
+const FilmKey = "current-Film";
+const itemsKey = "list-films";
+let selectedFilm = new Film();
+let films = [];
+load();
+loadFilm();
 
 
+document.getElementById('Video').src = films[selectedFilm].VideoUrl;
+document.getElementById('ScreenShot1').innerHTML = `<img src="${films[selectedFilm].Scr1Url}" alt="ScreenShot 1">`;
+document.getElementById('ScreenShot2').innerHTML = `<img src="${films[selectedFilm].Scr2Url}" alt="ScreenShot 2">`;
+document.getElementById('ScreenShot3').innerHTML = `<img src="${films[selectedFilm].Scr3Url}" alt="ScreenShot 3">`;
+document.getElementById('Description').textContent = films[selectedFilm].description;
+
+console.log(films[selectedFilm].name, films[selectedFilm].year);
+
+
+function load() {
+    films = JSON.parse(localStorage.getItem(itemsKey));
+}
+function loadFilm() {
+    film = JSON.parse(localStorage.getItem(FilmKey));
+}
 
 
 
