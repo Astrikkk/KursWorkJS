@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const filmId = this.querySelector('.film-id').textContent;
             currentFilm = filmId;
             saveFilm(currentFilm);
-            window.location.href = 'FilmOverview.html';
+            window.location.href = films[filmId].VideoUrl;
         });
     });
 });
