@@ -70,8 +70,10 @@ document.addEventListener('DOMContentLoaded', function () {
         card.addEventListener('click', function (event) {
             const filmId = this.querySelector('.film-id').textContent;
             currentFilm = filmId;
+            console.log(filmId);
             saveFilm(currentFilm);
-            window.location.href = films[filmId].VideoUrl;
+            //window.location.href = films[filmId].VideoUrl;
+            window.location.href = `FilmOverview.html?id=${filmId}`;
         });
     });
 });
