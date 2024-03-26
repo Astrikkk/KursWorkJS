@@ -15,7 +15,7 @@ if (form) {
         const scr1Url = form.elements.scr1Url.value;
         const scr2Url = form.elements.scr2Url.value;
         const scr3Url = form.elements.scr3Url.value;
-        const Description = form.elements.scr3Url.description;
+        const Description = form.elements.description.value;
 
         load();
         let film = new Film(nameIn, yearIn, authorIn,

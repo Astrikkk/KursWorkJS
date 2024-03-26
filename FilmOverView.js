@@ -2,9 +2,9 @@ const urlParams = new URLSearchParams(window.location.search);
 const ID = urlParams.get('id');
 console.log(ID);
 
+console.log("KFJY");
 
 const itemsKey = "list-films";
-let selectedFilm = new Film();
 let films = [];
 load();
 
@@ -12,9 +12,9 @@ load();
 
 
 document.getElementById('Video').src = films[ID].VideoUrl;
-document.getElementById('ScreenShot1').innerHTML = `<img src="${films[ID].Scr1Url}" alt="ScreenShot 1">`;
-document.getElementById('ScreenShot2').innerHTML = `<img src="${films[ID].Scr2Url}" alt="ScreenShot 2">`;
-document.getElementById('ScreenShot3').innerHTML = `<img src="${films[ID].Scr3Url}" alt="ScreenShot 3">`;
+document.getElementById('ScreenShot1').innerHTML = `<img src="${films[ID].Scr1Url}" width ="200px" alt="ScreenShot 1">`;
+document.getElementById('ScreenShot2').innerHTML = `<img src="${films[ID].Scr2Url}" width ="200px" alt="ScreenShot 2">`;
+document.getElementById('ScreenShot3').innerHTML = `<img src="${films[ID].Scr3Url}" width ="200px" alt="ScreenShot 3">`;
 document.getElementById('Description').textContent = films[ID].description;
 
 console.log(films[ID].name, films[ID].year);

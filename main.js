@@ -114,7 +114,7 @@ sortByRating.onclick = () => {
 function SortByGenre(genre) {
     const newFilms = [];
     films.forEach(element => {
-        if (element.genre === genre)
+        if (element.ganre.includes(genre))
             newFilms.push(element);
     });
     loadProductsToTable(newFilms);
@@ -149,9 +149,9 @@ function loadProductsToTable(items) {
         addFilmToList(film);
     }
 }
-
 function load() {
-    films = JSON.parse(localStorage.getItem(itemsKey));
+    const storedFilms = localStorage.getItem(itemsKey);
+    films = storedFilms ? JSON.parse(storedFilms) : [];
 }
 function saveFilm(item) {
     localStorage.setItem(FilmKey, JSON.stringify(item));
